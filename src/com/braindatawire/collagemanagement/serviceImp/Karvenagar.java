@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import com.braindatawire.collagemanagement.model.Batch;
 import com.braindatawire.collagemanagement.model.Course;
@@ -28,17 +29,14 @@ public class Karvenagar implements Cjc
 	//implemented method in cjc for add course
 	public void addCourse()
 	{
-		
-			Course c1 = new  Course();
-			System.out.println("Enter Course ID");
-			c1.setCid(sc.nextInt());
-			System.out.println("Enter Course Name");
-			c1.setCname(sc.next());
-			clist.add(c1);
-			count1++;
-		
-
-		
+		Course c1 = new  Course();
+		System.out.println("Enter Course ID");
+		c1.setCid(inputValidation());
+		//c1.setCid(sc.nextInt());
+		System.out.println("Enter Course Name");
+		c1.setCname(sc.next());
+		clist.add(c1);
+		count1++;
 	}
 	//implemented method in cjc for view course
 	public void viewCourse()
@@ -69,12 +67,12 @@ public class Karvenagar implements Cjc
 		{
 			Faculty f = new Faculty();
 			System.out.println("Enter Faculty Id");
-			f.setFid(sc.nextInt());
+			f.setFid(inputValidation());
 			System.out.println("Enter Faculty Name");
 			f.setFname(sc.next());
 			Iterator<Course> itr1 = clist.iterator();
 			System.out.println("Enter Course Id");
-			int eid = sc.nextInt();
+			int eid = inputValidation();
 			while(itr1.hasNext())
 			{
 				Course c = itr1.next();
@@ -132,12 +130,12 @@ public class Karvenagar implements Cjc
 		{
 			Batch b = new Batch();
 			System.out.println("Enter Batch Id");
-			b.setBid(sc.nextInt());
+			b.setBid(inputValidation());
 			System.out.println("Enter Batch Name");
 			b.setBname(sc.next());
 			Iterator<Faculty> itr1 = flist.iterator();
 			System.out.println("Enter Faculty Id");
-			int eid = sc.nextInt();
+			int eid = inputValidation();
 			while(itr1.hasNext())
 			{
 				Faculty f = itr1.next();
@@ -194,12 +192,12 @@ public class Karvenagar implements Cjc
 		{
 			Student s = new Student();
 			System.out.println("Enter Student Id");
-			s.setSid(sc.nextInt());
+			s.setSid(inputValidation());
 			System.out.println("Enter Student Name");
 			s.setSname(sc.next());
 			Iterator<Batch> itr1 = blist.iterator();
 			System.out.println("Enter Batch Id");
-			int ebid = sc.nextInt();
+			int ebid = inputValidation();
 			while(itr1.hasNext())
 			{
 				Batch b = itr1.next();
@@ -213,7 +211,6 @@ public class Karvenagar implements Cjc
 				else
 				{
 					System.out.println("Batch Not Availabale");
-					break;
 				}
 			}
 			
@@ -247,5 +244,29 @@ public class Karvenagar implements Cjc
 		{
 			addStudent();
 		}
+	}
+	
+	
+	// this method for user input validation
+	public int inputValidation()
+	{
+		String input;
+		while(true)
+		{
+			
+			input=sc.next();
+			boolean inputValid=	Pattern.matches("[0-9]{1,3}", input);
+			if(inputValid)
+			{
+				break;
+			}
+			else
+			{
+				System.out.println("You Enter Wrong Input Plz Try Agian");
+			}
+		}
+		//parse int is used to convert String to int for set ID, BatchId, FAcultyId
+		int validinput = Integer.parseInt(input);
+		return validinput;
 	}
 }
