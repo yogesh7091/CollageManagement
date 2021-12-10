@@ -31,10 +31,10 @@ public class Karvenagar implements Cjc
 	{
 		Course c1 = new  Course();
 		System.out.println("Enter Course ID");
-		c1.setCid(inputValidation());
+		c1.setCid(inputIntValidation());
 		//c1.setCid(sc.nextInt());
 		System.out.println("Enter Course Name");
-		c1.setCname(sc.next());
+		c1.setCname(inputStringValidation());
 		clist.add(c1);
 		count1++;
 	}
@@ -67,12 +67,12 @@ public class Karvenagar implements Cjc
 		{
 			Faculty f = new Faculty();
 			System.out.println("Enter Faculty Id");
-			f.setFid(inputValidation());
+			f.setFid(inputIntValidation());
 			System.out.println("Enter Faculty Name");
-			f.setFname(sc.next());
+			f.setFname(inputStringValidation());
 			Iterator<Course> itr1 = clist.iterator();
 			System.out.println("Enter Course Id");
-			int eid = inputValidation();
+			int eid = inputIntValidation();
 			while(itr1.hasNext())
 			{
 				Course c = itr1.next();
@@ -130,12 +130,12 @@ public class Karvenagar implements Cjc
 		{
 			Batch b = new Batch();
 			System.out.println("Enter Batch Id");
-			b.setBid(inputValidation());
+			b.setBid(inputIntValidation());
 			System.out.println("Enter Batch Name");
-			b.setBname(sc.next());
+			b.setBname(inputStringValidation());
 			Iterator<Faculty> itr1 = flist.iterator();
 			System.out.println("Enter Faculty Id");
-			int eid = inputValidation();
+			int eid = inputIntValidation();
 			while(itr1.hasNext())
 			{
 				Faculty f = itr1.next();
@@ -192,12 +192,12 @@ public class Karvenagar implements Cjc
 		{
 			Student s = new Student();
 			System.out.println("Enter Student Id");
-			s.setSid(inputValidation());
+			s.setSid(inputIntValidation());
 			System.out.println("Enter Student Name");
-			s.setSname(sc.next());
+			s.setSname(inputStringValidation());
 			Iterator<Batch> itr1 = blist.iterator();
 			System.out.println("Enter Batch Id");
-			int ebid = inputValidation();
+			int ebid = inputIntValidation();
 			while(itr1.hasNext())
 			{
 				Batch b = itr1.next();
@@ -247,8 +247,8 @@ public class Karvenagar implements Cjc
 	}
 	
 	
-	// this method for user input validation
-	public int inputValidation()
+	// this method for user  integer input validation
+	public int inputIntValidation()
 	{
 		String input;
 		while(true)
@@ -269,4 +269,26 @@ public class Karvenagar implements Cjc
 		int validinput = Integer.parseInt(input);
 		return validinput;
 	}
+	
+	
+	public String inputStringValidation()
+	{
+		String input;
+		while(true)
+		{
+			input=sc.next();
+			boolean inputValid=	Pattern.matches("[A-Z]{0,1}[a-z]{2,10}", input);
+			if(inputValid)
+			{
+				break;
+			}
+			else
+			{
+				System.out.println("You Enter Wrong Input Plz Try Agian");
+			}
+		}
+		
+		return input;
+	}
+	
 }
