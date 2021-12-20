@@ -1,7 +1,15 @@
 package com.braindatawire.collagemanagement.model;
 
-public class Course implements Comparable<Course>
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Course_tb")
+public class Course 
 {
+	@Id
 	private int cid;
 	private String cname;
 	public int getCid() {
@@ -17,10 +25,5 @@ public class Course implements Comparable<Course>
 		this.cname = cname;
 	}
 	
-	//implement method in Comparable interface for sort 
-	public int compareTo(Course c)
-	{
-		return this.cid-c.cid;
-	}
 	
 }

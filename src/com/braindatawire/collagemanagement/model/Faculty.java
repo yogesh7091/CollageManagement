@@ -1,9 +1,22 @@
 package com.braindatawire.collagemanagement.model;
 
-public class Faculty implements Comparable<Faculty>
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Faculty_tb")
+public class Faculty
 {
+	@Id
 	private int fid;
 	private String fname;
+	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(unique = true)
 	private Course course;
 	public int getFid() {
 		return fid;
@@ -24,11 +37,5 @@ public class Faculty implements Comparable<Faculty>
 		this.course = course;
 	}
 	
-	// in this method compare course id 
-	@Override
-	public int compareTo(Faculty o) {
-		// TODO Auto-generated method stub
-		return this.course.getCid()-o.course.getCid();
-	}
 	
 }

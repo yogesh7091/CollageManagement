@@ -1,9 +1,19 @@
 package com.braindatawire.collagemanagement.model;
 
-public class Student implements Comparable<Student>
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Student_tb")
+public class Student 
 {
+	@Id
 	private int sid;
 	private String sname;
+	@OneToOne(cascade = CascadeType.ALL)
 	private Batch batch;
 	public int getSid() {
 		return sid;
@@ -23,9 +33,5 @@ public class Student implements Comparable<Student>
 	public void setBatch(Batch batch) {
 		this.batch = batch;
 	}
-	@Override
-	public int compareTo(Student o) {
-		// TODO Auto-generated method stub
-		return this.sid-o.sid;
-	}
+	
 }
